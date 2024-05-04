@@ -25,7 +25,7 @@ const Header = () => {
     return (
         <div>
             <div className="my-6 space-y-5 text-center">
-            <h1 className="font-UnifrakturCook font-medium text-6xl">The Dragon News</h1>
+            <h1 className="font-UnifrakturCook font-medium text-7xl">The Dragon News</h1>
             <h1 className="font-inter text-lg font-normal">Journalism Without Fear or Favour</h1>
             <h1 className="font-inter text-xl font-medium">{weekName}<span className="text-[#797878]">, {monthName} {date}, {year}</span></h1>
             </div>
