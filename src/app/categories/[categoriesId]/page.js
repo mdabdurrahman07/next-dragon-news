@@ -1,9 +1,9 @@
 import React from 'react';
 
-const DynamicCategories = () => {
+const DynamicCategories = ({searchParams}) => {
     return (
         <div>
-            <h1>Dynamic Categories</h1>
+            <h1>Dynamic Categories {searchParams.category}</h1>
         </div>
     );
 };
