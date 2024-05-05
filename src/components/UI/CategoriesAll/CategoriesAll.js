@@ -6,7 +6,7 @@ const CategoriesAll = async () => {
   const { data: allCategories } = await getAllCategories();
   console.log(allCategories);
   return (
-    <Box className="my-5 bg-gray-200 px-4 py-3">
+    <Box className="mt-20 bg-gray-200 px-4 py-3">
       <h1 className="text-xl font-medium">Categories</h1>
       <Divider className="my-3" />
       <Stack spacing={2}>
