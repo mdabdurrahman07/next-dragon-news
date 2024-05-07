@@ -9,103 +9,37 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import nationalNews from "@/assets/national-news-top.png";
+import { getAllNews } from "@/utils/getAllNews";
 
-const NewsCard = () => {
+const NewsCard = async () => {
+  const {data} = await getAllNews()
   return (
     <Box className="my-5">
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        <Grid item xs={6}>
-          <Card>
+      {data.slice(0,4).map((news) =>
+        <Grid item xs={6}  key={news._id}>
+           <Card>
             <CardActionArea>
               <CardMedia>
-                <Image src={nationalNews} alt="top-news"></Image>
+                <Image src={news.thumbnail_url} width={500} height={200} alt="top-news"></Image>
               </CardMedia>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  Bitcoin Climbs as Elon Musk Says Tesla Likely to Accept it
-                  Again
+                  {news.title}
                 </Typography>
                 <Typography gutterBottom className="my-5">
-                  By Abdur Rahman - Mar 18 2024
+                  By {news.author.name} - {news.author.published_date}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  It is a long established fact that a reader will be distracted
-                  by the readable content of a page when looking at its
-                  layout........
+                {news?.details.length > 200
+                      ? news?.details.slice(0, 200) + "..."
+                      : news?.details}
                 </Typography>
               </CardContent>
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid item xs={6}>
-          <Card>
-            <CardActionArea>
-              <CardMedia>
-                <Image src={nationalNews} alt="top-news"></Image>
-              </CardMedia>
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  Bitcoin Climbs as Elon Musk Says Tesla Likely to Accept it
-                  Again
-                </Typography>
-                <Typography gutterBottom className="my-5">
-                  By Abdur Rahman - Mar 18 2024
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  It is a long established fact that a reader will be distracted
-                  by the readable content of a page when looking at its
-                  layout........
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
-        </Grid>
-        <Grid item xs={6}>
-          <Card>
-            <CardActionArea>
-              <CardMedia>
-                <Image src={nationalNews} alt="top-news"></Image>
-              </CardMedia>
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  Bitcoin Climbs as Elon Musk Says Tesla Likely to Accept it
-                  Again
-                </Typography>
-                <Typography gutterBottom className="my-5">
-                  By Abdur Rahman - Mar 18 2024
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  It is a long established fact that a reader will be distracted
-                  by the readable content of a page when looking at its
-                  layout........
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
-        </Grid>
-        <Grid item xs={6}>
-          <Card>
-            <CardActionArea>
-              <CardMedia>
-                <Image src={nationalNews} alt="top-news"></Image>
-              </CardMedia>
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  Bitcoin Climbs as Elon Musk Says Tesla Likely to Accept it
-                  Again
-                </Typography>
-                <Typography gutterBottom className="my-5">
-                  By Abdur Rahman - Mar 18 2024
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  It is a long established fact that a reader will be distracted
-                  by the readable content of a page when looking at its
-                  layout........
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
-        </Grid>
+      )}
       </Grid>
     </Box>
   );

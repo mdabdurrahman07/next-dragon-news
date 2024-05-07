@@ -11,24 +11,28 @@ import {
 import nationalNews from "@/assets/national-news-top.png";
 import Image from "next/image";
 import NewsCard from "./NewsCard";
-const LatestNews = () => {
+import { getAllNews } from "@/utils/getAllNews";
+const LatestNews = async () => {
+  const {data} = await getAllNews()
+  console.log(data[0])
   return (
     <Box>
       <Card>
         <CardActionArea>
           <CardMedia>
-            <Image src={nationalNews} alt="top-news"></Image>
+            <Image src={data[0].thumbnail_url} width={800} height={500} alt="top-news"></Image>
           </CardMedia>
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              Bitcoin Climbs as Elon Musk Says Tesla Likely to Accept it Again
+            {data[0].title}
             </Typography>
             <Typography gutterBottom className="my-5">
-              By Abdur Rahman - Mar 18 2024
+              By {data[0].author.name} - {data[0]?.author.published_date}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              It is a long established fact that a reader will be distracted by
-              the readable content of a page when looking at its layout........
+            {data[0]?.details.length > 200
+                      ? data[0]?.details.slice(0, 200) + "..."
+                      : data[0]?.details}
             </Typography>
           </CardContent>
         </CardActionArea>
